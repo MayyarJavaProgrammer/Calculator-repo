@@ -4,11 +4,24 @@
  */
 package calculator;
 
+import java.text.DecimalFormat;
+import java.text.Format;
+import javax.swing.JButton;
+
 /**
  *
  * @author PC
  */
 public class MainFrame extends javax.swing.JFrame {
+
+    double num;
+    double answer;
+    double oldAnswer;
+    char operation;
+    boolean isTextChanged = false;
+    boolean noClickedOperator = true;
+    boolean isEqualClicked = false;
+    DecimalFormat format = new DecimalFormat("0.#############");
 
     /**
      * Creates new form Main
@@ -32,7 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
         zeroBtn = new javax.swing.JButton();
         twoBtn = new javax.swing.JButton();
         threeBtn = new javax.swing.JButton();
-        dotBtn = new javax.swing.JButton();
+        commaBtn = new javax.swing.JButton();
         fourBtn = new javax.swing.JButton();
         fiveBtn = new javax.swing.JButton();
         sixBtn = new javax.swing.JButton();
@@ -55,66 +68,142 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(255, 275));
-        setMinimumSize(new java.awt.Dimension(255, 275));
-        setPreferredSize(new java.awt.Dimension(255, 275));
+        setMaximumSize(new java.awt.Dimension(238, 244));
+        setMinimumSize(new java.awt.Dimension(238, 244));
+        setPreferredSize(new java.awt.Dimension(238, 244));
+        setResizable(false);
 
+        resultField.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         resultField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        resultField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resultFieldActionPerformed(evt);
+            }
+        });
 
+        oldResultLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         oldResultLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         oldResultLabel.setFocusable(false);
 
+        oneBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         oneBtn.setText("1");
         oneBtn.setFocusable(false);
+        oneBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                oneBtnActionPerformed(evt);
+            }
+        });
 
+        zeroBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         zeroBtn.setText("0");
         zeroBtn.setFocusable(false);
+        zeroBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zeroBtnActionPerformed(evt);
+            }
+        });
 
+        twoBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         twoBtn.setText("2");
         twoBtn.setFocusable(false);
+        twoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                twoBtnActionPerformed(evt);
+            }
+        });
 
+        threeBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         threeBtn.setText("3");
         threeBtn.setFocusable(false);
+        threeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                threeBtnActionPerformed(evt);
+            }
+        });
 
-        dotBtn.setText(".");
-        dotBtn.setFocusable(false);
+        commaBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
+        commaBtn.setText(".");
+        commaBtn.setFocusable(false);
 
+        fourBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         fourBtn.setText("4");
         fourBtn.setFocusable(false);
+        fourBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fourBtnActionPerformed(evt);
+            }
+        });
 
+        fiveBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         fiveBtn.setText("5");
         fiveBtn.setFocusable(false);
+        fiveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fiveBtnActionPerformed(evt);
+            }
+        });
 
+        sixBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         sixBtn.setText("6");
         sixBtn.setFocusable(false);
+        sixBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sixBtnActionPerformed(evt);
+            }
+        });
 
+        sevenBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         sevenBtn.setText("7");
         sevenBtn.setFocusable(false);
+        sevenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sevenBtnActionPerformed(evt);
+            }
+        });
 
+        eightBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         eightBtn.setText("8");
         eightBtn.setFocusable(false);
+        eightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eightBtnActionPerformed(evt);
+            }
+        });
 
+        nineBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         nineBtn.setText("9");
         nineBtn.setFocusable(false);
+        nineBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nineBtnActionPerformed(evt);
+            }
+        });
 
+        divideBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         divideBtn.setText("÷");
         divideBtn.setFocusable(false);
 
+        multiplicBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         multiplicBtn.setText("x");
         multiplicBtn.setFocusable(false);
 
+        subtractionBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         subtractionBtn.setText("-");
         subtractionBtn.setFocusable(false);
 
+        additionBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         additionBtn.setText("+");
         additionBtn.setFocusable(false);
 
+        equalBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         equalBtn.setText("=");
         equalBtn.setFocusable(false);
 
+        backBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         backBtn.setText("←");
         backBtn.setFocusable(false);
 
+        clearBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         clearBtn.setText("C");
         clearBtn.setFocusable(false);
 
@@ -162,7 +251,7 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(zeroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dotBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(commaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(divideBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -200,19 +289,56 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(threeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(divideBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dotBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(divideBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(commaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(zeroBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(equalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(254, 282));
         setLocationRelativeTo(null);
     }//GEN-END:initComponents
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void resultFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resultFieldActionPerformed
+
+    private void zeroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());
+    }//GEN-LAST:event_zeroBtnActionPerformed
+
+    private void oneBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());
+    }//GEN-LAST:event_oneBtnActionPerformed
+
+    private void twoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());
+    }//GEN-LAST:event_twoBtnActionPerformed
+
+    private void threeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());    }//GEN-LAST:event_threeBtnActionPerformed
+
+    private void fourBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());    }//GEN-LAST:event_fourBtnActionPerformed
+
+    private void fiveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiveBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());    }//GEN-LAST:event_fiveBtnActionPerformed
+
+    private void sixBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());    }//GEN-LAST:event_sixBtnActionPerformed
+
+    private void sevenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sevenBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());    }//GEN-LAST:event_sevenBtnActionPerformed
+
+    private void eightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eightBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());    }//GEN-LAST:event_eightBtnActionPerformed
+
+    private void nineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nineBtnActionPerformed
+        setClickedNumber((JButton) evt.getSource());    }//GEN-LAST:event_nineBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,12 +376,42 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
+    private void calculateOldAnswer() {
+        switch (operation) {
+            case '*' ->
+                oldAnswer *= num;
+            case '/' ->
+                oldAnswer /= num;
+            case '+' ->
+                oldAnswer += num;
+            case '-' -> {
+                if (!oldResultLabel.getText().isEmpty()) {
+                    oldAnswer -= num;
+                } else {
+                    oldAnswer = num - oldAnswer;
+                }
+            }
+
+        }
+    }
+
+    private void setClickedNumber(JButton clickedBtn) {
+        if (isEqualClicked || resultField.getText().equals("0")) {
+            resultField.setText(clickedBtn.getText());
+        } else {
+            resultField.setText(resultField.getText() + clickedBtn.getText());
+        }
+
+        isEqualClicked = false;
+        isTextChanged = true;
+        noClickedOperator = true;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton additionBtn;
     private javax.swing.JButton backBtn;
     private javax.swing.JButton clearBtn;
+    private javax.swing.JButton commaBtn;
     private javax.swing.JButton divideBtn;
-    private javax.swing.JButton dotBtn;
     private javax.swing.JButton eightBtn;
     private javax.swing.JButton equalBtn;
     private javax.swing.JButton fiveBtn;
