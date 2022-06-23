@@ -452,37 +452,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_subtractionBtnActionPerformed
 
     private void multiplicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplicBtnActionPerformed
-        if (noClickedOperator) {
-            if (isDivideByZero()) {
-                resultField.setText("cannot divide by 0");
-            } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
-                try {
-                    if (resultField.getText().isEmpty()) {
-                        num = 1;
-                    } else {
-                        num = Double.parseDouble(resultField.getText());
-                    }
-                    
-                    if (oldResultLabel.getText().isEmpty()) {
-                        oldAnswer = 1;
-                    } else {
-                        oldAnswer = Double.parseDouble(oldResultLabel.getText());
-                    }
-                    
-                    operation = '*';
-                    calculateOldAnswer();
-                    oldOperationLabel.setText("x");
-                    oldResultLabel.setText(format.format(oldAnswer));
-                    resultField.setText("");
-                    
-                } catch (Exception ex) {
-                    resultField.setText("Error");
-                }
-                
-                isTextChanged = false;
-                noClickedOperator = false;
-            }
-        }
+        
     }//GEN-LAST:event_multiplicBtnActionPerformed
 
     /**
