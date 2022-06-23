@@ -377,7 +377,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void additionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_additionBtnActionPerformed
         if (noClickedOperator) {
-            if (resultField.getText().equals("0") && oldOperationLabel.getText().equals("/")) {
+            if (isDivideByZero()) {
                 resultField.setText("cannot divide by 0");
             } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
                 try {
@@ -473,6 +473,10 @@ public class MainFrame extends javax.swing.JFrame {
         isEqualClicked = false;
         isTextChanged = true;
         noClickedOperator = true;
+    }
+    
+    private boolean isDivideByZero() {
+        return resultField.getText().equals("0") && oldOperationLabel.getText().equals("/");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton additionBtn;
