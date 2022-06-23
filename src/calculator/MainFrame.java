@@ -388,21 +388,20 @@ public class MainFrame extends javax.swing.JFrame {
                     }
 
                     if (oldResultLabel.getText().isEmpty()) {
-                        operation = '+';
                         oldAnswer = 0;
                     } else {
                         oldAnswer = Double.parseDouble(oldResultLabel.getText());
                     }
+                    operation = '+';
                     calculateOldAnswer();
                     oldOperationLabel.setText("+");
                     oldResultLabel.setText(format.format(oldAnswer));
                     resultField.setText("");
 
-                    operation = '+';
                 } catch (Exception ex) {
                     resultField.setText("Error");
                 }
-                
+
                 isTextChanged = false;
                 noClickedOperator = false;
             }
