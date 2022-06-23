@@ -13,7 +13,7 @@ import javax.swing.JButton;
  * @author PC
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
     double num;
     double answer;
     double oldAnswer;
@@ -379,7 +379,7 @@ public class MainFrame extends javax.swing.JFrame {
         } else if (!resultField.getText().contains(".")) {
             resultField.setText(resultField.getText() + ".");
         }
-        
+
         isEqualClicked = false;
         isTextChanged = true;
     }//GEN-LAST:event_commaBtnActionPerformed
@@ -395,7 +395,7 @@ public class MainFrame extends javax.swing.JFrame {
                     } else {
                         num = Double.parseDouble(resultField.getText());
                     }
-                    
+
                     if (oldResultLabel.getText().isEmpty()) {
                         oldAnswer = 0;
                     } else {
@@ -406,11 +406,11 @@ public class MainFrame extends javax.swing.JFrame {
                     oldOperationLabel.setText("+");
                     oldResultLabel.setText(format.format(oldAnswer));
                     resultField.setText("");
-                    
+
                 } catch (Exception ex) {
                     resultField.setText("Error");
                 }
-                
+
                 isTextChanged = false;
                 noClickedOperator = false;
             }
@@ -428,23 +428,23 @@ public class MainFrame extends javax.swing.JFrame {
                     } else {
                         num = Double.parseDouble(resultField.getText());
                     }
-                    
+
                     if (oldResultLabel.getText().isEmpty()) {
                         oldAnswer = 0;
                     } else {
                         oldAnswer = Double.parseDouble(oldResultLabel.getText());
                     }
-                    
+
                     operation = '-';
                     calculateOldAnswer();
                     oldOperationLabel.setText("-");
                     oldResultLabel.setText(format.format(oldAnswer));
                     resultField.setText("");
-                    
+
                 } catch (Exception ex) {
                     resultField.setText("Error");
                 }
-                
+
                 isTextChanged = false;
                 noClickedOperator = false;
             }
@@ -452,7 +452,37 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_subtractionBtnActionPerformed
 
     private void multiplicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplicBtnActionPerformed
-        
+        if (noClickedOperator) {
+            if (isDivideByZero()) {
+                resultField.setText("cannot divide by 0");
+            } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
+                try {
+                    if (resultField.getText().isEmpty()) {
+                        num = 1;
+                    } else {
+                        num = Double.parseDouble(resultField.getText());
+                    }
+
+                    if (oldResultLabel.getText().isEmpty()) {
+                        oldAnswer = 1;
+                    } else {
+                        oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                    }
+
+                    operation = '*';
+                    calculateOldAnswer();
+                    oldOperationLabel.setText("x");
+                    oldResultLabel.setText(format.format(oldAnswer));
+                    resultField.setText("");
+
+                } catch (Exception ex) {
+                    resultField.setText("Error");
+                }
+
+                isTextChanged = false;
+                noClickedOperator = false;
+            }
+        }
     }//GEN-LAST:event_multiplicBtnActionPerformed
 
     /**
@@ -490,7 +520,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void calculateOldAnswer() {
         switch (operation) {
             case '*' ->
@@ -506,22 +536,22 @@ public class MainFrame extends javax.swing.JFrame {
                     oldAnswer = num - oldAnswer;
                 }
             }
-            
+
         }
     }
-    
+
     private void setClickedNumber(JButton clickedBtn) {
         if (isEqualClicked || resultField.getText().equals("0")) {
             resultField.setText(clickedBtn.getText());
         } else {
             resultField.setText(resultField.getText() + clickedBtn.getText());
         }
-        
+
         isEqualClicked = false;
         isTextChanged = true;
         noClickedOperator = true;
     }
-    
+
     private boolean isDivideByZero() {
         return resultField.getText().equals("0") && oldOperationLabel.getText().equals("/");
     }
