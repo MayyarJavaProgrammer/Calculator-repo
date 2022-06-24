@@ -78,6 +78,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculator");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/calculator/icon/Calculator.png")).getImage()
+        );
         setMinimumSize(new java.awt.Dimension(238, 244));
         setResizable(false);
 
