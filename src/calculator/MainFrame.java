@@ -191,6 +191,11 @@ public class MainFrame extends javax.swing.JFrame {
         divideBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         divideBtn.setText("÷");
         divideBtn.setFocusable(false);
+        divideBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                divideBtnActionPerformed(evt);
+            }
+        });
 
         multiplicBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         multiplicBtn.setText("x");
@@ -484,6 +489,41 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_multiplicBtnActionPerformed
+
+    private void divideBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideBtnActionPerformed
+        if (noClickedOperator) {
+            if (isDivideByZero()) {
+                resultField.setText("cannot divide by 0");
+            } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
+                try {
+
+                    if (resultField.getText().isEmpty()) {
+                        num = 1;
+                    } else {
+                        num = Double.parseDouble(resultField.getText());
+                    }
+
+                    if (oldResultLabel.getText().isEmpty()) {
+                        oldAnswer = num;
+                    } else {
+                        oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                        operation = '/';
+                        calculateOldAnswer();
+                    }
+
+                    oldOperationLabel.setText("÷");
+                    oldResultLabel.setText(format.format(oldAnswer));
+                    resultField.setText("");
+
+                } catch (Exception ex) {
+                    resultField.setText("Error");
+                }
+
+                isTextChanged = false;
+                noClickedOperator = false;
+            }
+        }
+    }//GEN-LAST:event_divideBtnActionPerformed
 
     /**
      * @param args the command line arguments
