@@ -248,6 +248,11 @@ public class MainFrame extends javax.swing.JFrame {
         clearBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         clearBtn.setText("C");
         clearBtn.setFocusable(false);
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
 
         oldOperationLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         oldOperationLabel.setFocusable(false);
@@ -568,6 +573,15 @@ public class MainFrame extends javax.swing.JFrame {
             resultField.setText(resultField.getText().substring(0, resultField.getText().length() -1 ));
         }
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+       resultField.setText("");
+       oldOperationLabel.setText("");
+       oldResultLabel.setText("");
+       num = 0;
+       oldAnswer = 0;
+       noClickedOperator = true;
+    }//GEN-LAST:event_clearBtnActionPerformed
 
     /**
      * @param args the command line arguments
