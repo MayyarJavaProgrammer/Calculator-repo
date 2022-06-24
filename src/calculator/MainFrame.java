@@ -4,9 +4,14 @@
  */
 package calculator;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -532,9 +537,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         if (isDivideByZero()) {
             resultField.setText("cannot divide by 0");
-        }
-        
-        else if (!resultField.getText().isEmpty() && !oldResultLabel.getText().isEmpty()) {
+        } else if (!resultField.getText().isEmpty() && !oldResultLabel.getText().isEmpty()) {
             //here we set the numbers and calculate the result using calculateOldAnswer method
             //because we have a method do that in the program we don't have to repeat it in another way
             oldAnswer = Double.parseDouble(oldResultLabel.getText());
@@ -563,20 +566,9 @@ public class MainFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
