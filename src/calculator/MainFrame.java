@@ -77,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Calculator");
         setMinimumSize(new java.awt.Dimension(238, 244));
         setResizable(false);
 
@@ -227,6 +228,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        equalBtn.setBackground(new java.awt.Color(204, 204, 204));
         equalBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         equalBtn.setText("=");
         equalBtn.setFocusable(false);
@@ -236,6 +238,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        backBtn.setBackground(new java.awt.Color(238, 252, 0));
         backBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         backBtn.setText("←");
         backBtn.setFocusable(false);
@@ -246,6 +249,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         clearBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
+        clearBtn.setForeground(new java.awt.Color(255, 59, 59));
         clearBtn.setText("C");
         clearBtn.setFocusable(false);
         clearBtn.addActionListener(new java.awt.event.ActionListener() {
