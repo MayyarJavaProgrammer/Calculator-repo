@@ -239,6 +239,11 @@ public class MainFrame extends javax.swing.JFrame {
         backBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         backBtn.setText("←");
         backBtn.setFocusable(false);
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         clearBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         clearBtn.setText("C");
@@ -555,6 +560,14 @@ public class MainFrame extends javax.swing.JFrame {
         isEqualClicked = true;
         noClickedOperator = true;
     }//GEN-LAST:event_equalBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        if(resultField.getText().equals("Error") || resultField.getText().equals("cannot divide by 0")) {
+            resultField.setText("");
+        } else if(!resultField.getText().isEmpty()) {
+            resultField.setText(resultField.getText().substring(0, resultField.getText().length() -1 ));
+        }
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
