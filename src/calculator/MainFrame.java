@@ -72,9 +72,7 @@ public class MainFrame extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(238, 244));
         setMinimumSize(new java.awt.Dimension(238, 244));
-        setPreferredSize(new java.awt.Dimension(238, 244));
         setResizable(false);
 
         resultField.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
@@ -227,6 +225,11 @@ public class MainFrame extends javax.swing.JFrame {
         equalBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         equalBtn.setText("=");
         equalBtn.setFocusable(false);
+        equalBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                equalBtnActionPerformed(evt);
+            }
+        });
 
         backBtn.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         backBtn.setText("←");
@@ -474,7 +477,7 @@ public class MainFrame extends javax.swing.JFrame {
                         oldAnswer = Double.parseDouble(oldResultLabel.getText());
                     }
 
-                    operation = '*';
+                    operation = 'x';
                     calculateOldAnswer();
                     oldOperationLabel.setText("x");
                     oldResultLabel.setText(format.format(oldAnswer));
@@ -507,7 +510,7 @@ public class MainFrame extends javax.swing.JFrame {
                         oldAnswer = num;
                     } else {
                         oldAnswer = Double.parseDouble(oldResultLabel.getText());
-                        operation = '/';
+                        operation = '÷';
                         calculateOldAnswer();
                     }
 
@@ -524,6 +527,31 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_divideBtnActionPerformed
+
+    private void equalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalBtnActionPerformed
+
+        if (isDivideByZero()) {
+            resultField.setText("cannot divide by 0");
+        }
+        
+        else if (!resultField.getText().isEmpty() && !oldResultLabel.getText().isEmpty()) {
+            //here we set the numbers and calculate the result using calculateOldAnswer method
+            //because we have a method do that in the program we don't have to repeat it in another way
+            oldAnswer = Double.parseDouble(oldResultLabel.getText());
+            num = Double.parseDouble(resultField.getText());
+            operation = oldOperationLabel.getText().charAt(0);
+            calculateOldAnswer();
+            resultField.setText(format.format(oldAnswer));
+        } else if (resultField.getText().isEmpty() && !oldOperationLabel.getText().isEmpty()) {
+            resultField.setText(oldResultLabel.getText());
+        }
+
+        oldResultLabel.setText("");
+        oldOperationLabel.setText("");
+
+        isEqualClicked = true;
+        noClickedOperator = true;
+    }//GEN-LAST:event_equalBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -563,9 +591,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void calculateOldAnswer() {
         switch (operation) {
-            case '*' ->
+            case 'x' ->
                 oldAnswer *= num;
-            case '/' ->
+            case '÷' ->
                 oldAnswer /= num;
             case '+' ->
                 oldAnswer += num;
@@ -593,7 +621,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private boolean isDivideByZero() {
-        return resultField.getText().equals("0") && oldOperationLabel.getText().equals("/");
+        return resultField.getText().equals("0") && oldOperationLabel.getText().equals("÷");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
