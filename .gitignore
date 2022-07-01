@@ -3,3 +3,5 @@ build/
 test/
 nbproject/
 build.xml
+dist/
+*.jar
