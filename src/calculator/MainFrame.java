@@ -6,7 +6,6 @@ package calculator;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.text.DecimalFormat;
-import java.text.Format;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -20,11 +19,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class MainFrame extends javax.swing.JFrame {
 
     double num;
-    double answer;
     double oldAnswer;
     char operation;
     boolean isTextChanged = false;
-    boolean noClickedOperator = true;
     boolean isEqualClicked = false;
     DecimalFormat format = new DecimalFormat("0.#############");
 
@@ -414,7 +411,6 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_commaBtnActionPerformed
 
     private void additionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_additionBtnActionPerformed
-        if (noClickedOperator) {
             if (isDivideByZero()) {
                 resultField.setText("cannot divide by 0");
             } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
@@ -426,12 +422,14 @@ public class MainFrame extends javax.swing.JFrame {
                     }
 
                     if (oldResultLabel.getText().isEmpty()) {
-                        oldAnswer = 0;
+                        operation = '+';
+                        oldAnswer = num;
                     } else {
                         oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                        //we calculate first and then we set operation to calculate Old operation first
+                        calculateOldAnswer();
                     }
-                    operation = '+';
-                    calculateOldAnswer();
+
                     oldOperationLabel.setText("+");
                     oldResultLabel.setText(format.format(oldAnswer));
                     resultField.setText("");
@@ -439,15 +437,13 @@ public class MainFrame extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     resultField.setText("Error");
                 }
-
+                operation = '+';
                 isTextChanged = false;
-                noClickedOperator = false;
             }
-        }
+        
     }//GEN-LAST:event_additionBtnActionPerformed
 
     private void subtractionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractionBtnActionPerformed
-        if (noClickedOperator) {
             if (isDivideByZero()) {
                 resultField.setText("cannot divide by 0");
             } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
@@ -459,13 +455,14 @@ public class MainFrame extends javax.swing.JFrame {
                     }
 
                     if (oldResultLabel.getText().isEmpty()) {
-                        oldAnswer = 0;
+                        //if condition is true that mean this is first operation so we have to set it
+                        operation = '-';
+                        oldAnswer = num;
                     } else {
                         oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                        calculateOldAnswer();
                     }
 
-                    operation = '-';
-                    calculateOldAnswer();
                     oldOperationLabel.setText("-");
                     oldResultLabel.setText(format.format(oldAnswer));
                     resultField.setText("");
@@ -473,15 +470,13 @@ public class MainFrame extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     resultField.setText("Error");
                 }
-
+                operation = '-';
                 isTextChanged = false;
-                noClickedOperator = false;
             }
-        }
+        
     }//GEN-LAST:event_subtractionBtnActionPerformed
 
     private void multiplicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplicBtnActionPerformed
-        if (noClickedOperator) {
             if (isDivideByZero()) {
                 resultField.setText("cannot divide by 0");
             } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
@@ -493,13 +488,15 @@ public class MainFrame extends javax.swing.JFrame {
                     }
 
                     if (oldResultLabel.getText().isEmpty()) {
+                        //if condition is true that mean this is first operation so we have to set it
+                        operation = 'x';
                         oldAnswer = 1;
                     } else {
                         oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                        calculateOldAnswer();
                     }
 
-                    operation = 'x';
-                    calculateOldAnswer();
+
                     oldOperationLabel.setText("x");
                     oldResultLabel.setText(format.format(oldAnswer));
                     resultField.setText("");
@@ -507,15 +504,14 @@ public class MainFrame extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     resultField.setText("Error");
                 }
-
+                
+                operation = 'x';
                 isTextChanged = false;
-                noClickedOperator = false;
             }
-        }
+        
     }//GEN-LAST:event_multiplicBtnActionPerformed
 
     private void divideBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideBtnActionPerformed
-        if (noClickedOperator) {
             if (isDivideByZero()) {
                 resultField.setText("cannot divide by 0");
             } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
@@ -531,7 +527,6 @@ public class MainFrame extends javax.swing.JFrame {
                         oldAnswer = num;
                     } else {
                         oldAnswer = Double.parseDouble(oldResultLabel.getText());
-                        operation = '÷';
                         calculateOldAnswer();
                     }
 
@@ -542,11 +537,10 @@ public class MainFrame extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     resultField.setText("Error");
                 }
-
+                operation = '÷';
                 isTextChanged = false;
-                noClickedOperator = false;
             }
-        }
+        
     }//GEN-LAST:event_divideBtnActionPerformed
 
     private void equalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalBtnActionPerformed
@@ -569,7 +563,6 @@ public class MainFrame extends javax.swing.JFrame {
         oldOperationLabel.setText("");
 
         isEqualClicked = true;
-        noClickedOperator = true;
     }//GEN-LAST:event_equalBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -586,7 +579,6 @@ public class MainFrame extends javax.swing.JFrame {
        oldResultLabel.setText("");
        num = 0;
        oldAnswer = 0;
-       noClickedOperator = true;
     }//GEN-LAST:event_clearBtnActionPerformed
 
     /**
@@ -642,7 +634,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         isEqualClicked = false;
         isTextChanged = true;
-        noClickedOperator = true;
     }
 
     private boolean isDivideByZero() {
