@@ -80,6 +80,7 @@ public class MainFrame extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(238, 244));
         setResizable(false);
 
+        resultField.setEditable(false);
         resultField.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         resultField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         resultField.addActionListener(new java.awt.event.ActionListener() {
