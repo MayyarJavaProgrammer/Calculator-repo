@@ -401,9 +401,10 @@ public class MainFrame extends javax.swing.JFrame {
         setClickedNumber((JButton) evt.getSource());    }//GEN-LAST:event_nineBtnActionPerformed
 
     private void commaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commaBtnActionPerformed
+        //if clicked equal restart inputs or there was no input start with 0. 
         if (isEqualClicked || resultField.getText().isEmpty()) {
             resultField.setText("0.");
-        } else if (!resultField.getText().contains(".")) {
+        } else if (!resultField.getText().contains(".")) {// if there is no comma in input set on else do nothing
             resultField.setText(resultField.getText() + ".");
         }
 
@@ -412,143 +413,149 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_commaBtnActionPerformed
 
     private void additionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_additionBtnActionPerformed
-            if (isDivideByZero()) {
-                resultField.setText("cannot divide by 0");
-            } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
-                try {
-                    if (resultField.getText().isEmpty()) {
-                        num = 0;
-                    } else {
-                        num = Double.parseDouble(resultField.getText());
-                    }
-
-                    if (oldResultLabel.getText().isEmpty()) {
-                        operation = '+';
-                        oldAnswer = num;
-                    } else {
-                        oldAnswer = Double.parseDouble(oldResultLabel.getText());
-                        //we calculate first and then we set operation to calculate Old operation first
-                        calculateOldAnswer();
-                    }
-
-                    oldOperationLabel.setText("+");
-                    oldResultLabel.setText(format.format(oldAnswer));
-                    resultField.setText("");
-
-                } catch (Exception ex) {
-                    resultField.setText("Error");
+        //if there was divide by 0 set error     
+        if (isDivideByZero()) {
+            resultField.setText("cannot divide by 0");
+        } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {// if there is input (textChanged or old ResultLabel is empty mean we will set 0 + as first input
+            try {
+                //if we have no input set 0 
+                if (resultField.getText().isEmpty()) {
+                    num = 0;
+                } else {
+                    num = Double.parseDouble(resultField.getText());
                 }
-                operation = '+';
-                isTextChanged = false;
+                //if it is the first number that clicked just set it without calculate
+                if (oldResultLabel.getText().isEmpty()) {
+                    operation = '+';
+                    oldAnswer = num;
+                } else { //else there is two number do calculate
+                    oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                    //we calculate first and then we set operation to calculate Old operation first
+                    calculateOldAnswer();
+                }
+                //set result to user
+                oldOperationLabel.setText("+");
+                oldResultLabel.setText(format.format(oldAnswer));
+                resultField.setText("");
+
+            } catch (Exception ex) {
+                resultField.setText("Error");
             }
-        
+            //operation is + that mean in the next call of calculateOldAnswer it will do the operation
+            //and then do the another operation that clicked
+            operation = '+';
+            isTextChanged = false;
+        }
+
     }//GEN-LAST:event_additionBtnActionPerformed
 
     private void subtractionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractionBtnActionPerformed
-            if (isDivideByZero()) {
-                resultField.setText("cannot divide by 0");
-            } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
-                try {
-                    if (resultField.getText().isEmpty()) {
-                        num = 0;
-                    } else {
-                        num = Double.parseDouble(resultField.getText());
-                    }
-
-                    if (oldResultLabel.getText().isEmpty()) {
-                        //if condition is true that mean this is first operation so we have to set it
-                        operation = '-';
-                        oldAnswer = num;
-                    } else {
-                        oldAnswer = Double.parseDouble(oldResultLabel.getText());
-                        calculateOldAnswer();
-                    }
-
-                    oldOperationLabel.setText("-");
-                    oldResultLabel.setText(format.format(oldAnswer));
-                    resultField.setText("");
-
-                } catch (Exception ex) {
-                    resultField.setText("Error");
+        if (isDivideByZero()) {
+            resultField.setText("cannot divide by 0");
+        } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {//if there is input or this is first input
+            try {
+                //if we have no input set 0
+                if (resultField.getText().isEmpty()) {
+                    num = 0;
+                } else {
+                    num = Double.parseDouble(resultField.getText());
                 }
-                operation = '-';
-                isTextChanged = false;
+
+                if (oldResultLabel.getText().isEmpty()) {
+                    //if condition is true that mean this is first operation so we have to set it
+                    operation = '-';
+                    oldAnswer = num;
+                } else {
+                    oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                    calculateOldAnswer();
+                }
+                //set result to user
+                oldOperationLabel.setText("-");
+                oldResultLabel.setText(format.format(oldAnswer));
+                resultField.setText("");
+
+            } catch (Exception ex) {
+                resultField.setText("Error");
             }
-        
+            operation = '-';
+            isTextChanged = false;
+        }
+
     }//GEN-LAST:event_subtractionBtnActionPerformed
 
     private void multiplicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplicBtnActionPerformed
-            if (isDivideByZero()) {
-                resultField.setText("cannot divide by 0");
-            } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
-                try {
-                    if (resultField.getText().isEmpty()) {
-                        num = 1;
-                    } else {
-                        num = Double.parseDouble(resultField.getText());
-                    }
-
-                    if (oldResultLabel.getText().isEmpty()) {
-                        //if condition is true that mean this is first operation so we have to set it
-                        operation = 'x';
-                        oldAnswer = 1;
-                    } else {
-                        oldAnswer = Double.parseDouble(oldResultLabel.getText());
-                        calculateOldAnswer();
-                    }
-
-
-                    oldOperationLabel.setText("x");
-                    oldResultLabel.setText(format.format(oldAnswer));
-                    resultField.setText("");
-
-                } catch (Exception ex) {
-                    resultField.setText("Error");
+        if (isDivideByZero()) {
+            resultField.setText("cannot divide by 0");
+        } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {//there is input or this is first input
+            try {
+                //if there is no input set 1
+                if (resultField.getText().isEmpty()) {
+                    num = 1;
+                } else {
+                    num = Double.parseDouble(resultField.getText());
                 }
-                
-                operation = 'x';
-                isTextChanged = false;
+
+                if (oldResultLabel.getText().isEmpty()) {
+                    //if condition is true that mean this is first operation so we have to set it
+                    operation = 'x';
+                    oldAnswer = 1;
+                } else {//there is two number do calculate
+                    oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                    calculateOldAnswer();
+                }
+
+                oldOperationLabel.setText("x");
+                oldResultLabel.setText(format.format(oldAnswer));
+                resultField.setText("");
+
+            } catch (Exception ex) {
+                resultField.setText("Error");
             }
-        
+            //set operation to do it in next call of calculateOldAnswer()
+            operation = 'x';
+            isTextChanged = false;
+        }
+
     }//GEN-LAST:event_multiplicBtnActionPerformed
 
     private void divideBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideBtnActionPerformed
-            if (isDivideByZero()) {
-                resultField.setText("cannot divide by 0");
-            } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {
-                try {
+        if (isDivideByZero()) {
+            resultField.setText("cannot divide by 0");
+        } else if (isTextChanged || oldResultLabel.getText().isEmpty()) {//there is input or it is first input
+            try {
 
-                    if (resultField.getText().isEmpty()) {
-                        num = 1;
-                    } else {
-                        num = Double.parseDouble(resultField.getText());
-                    }
-
-                    if (oldResultLabel.getText().isEmpty()) {
-                        oldAnswer = num;
-                    } else {
-                        oldAnswer = Double.parseDouble(oldResultLabel.getText());
-                        calculateOldAnswer();
-                    }
-
-                    oldOperationLabel.setText("÷");
-                    oldResultLabel.setText(format.format(oldAnswer));
-                    resultField.setText("");
-
-                } catch (Exception ex) {
-                    resultField.setText("Error");
+                if (resultField.getText().isEmpty()) {//if there is no input set 1
+                    num = 1;
+                } else {
+                    num = Double.parseDouble(resultField.getText());
                 }
-                operation = '÷';
-                isTextChanged = false;
+                //if it is first input just set it
+                if (oldResultLabel.getText().isEmpty()) {
+                    oldAnswer = num;
+                } else { // else there is two number do calculate
+                    oldAnswer = Double.parseDouble(oldResultLabel.getText());
+                    calculateOldAnswer();
+                }
+                //set result to user
+                oldOperationLabel.setText("÷");
+                oldResultLabel.setText(format.format(oldAnswer));
+                resultField.setText("");
+
+            } catch (Exception ex) {
+                resultField.setText("Error");
             }
-        
+            //set operation is divide for the next call of calculateOldAnswer()
+            operation = '÷';
+            isTextChanged = false;
+        }
+
     }//GEN-LAST:event_divideBtnActionPerformed
 
     private void equalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalBtnActionPerformed
 
         if (isDivideByZero()) {
             resultField.setText("cannot divide by 0");
-        } else if (!resultField.getText().isEmpty() && !oldResultLabel.getText().isEmpty()) {
+        } else if (!resultField.getText().isEmpty() && !oldResultLabel.getText().isEmpty()) {//if there is two number 
             //here we set the numbers and calculate the result using calculateOldAnswer method
             //because we have a method do that in the program we don't have to repeat it in another way
             oldAnswer = Double.parseDouble(oldResultLabel.getText());
@@ -556,30 +563,31 @@ public class MainFrame extends javax.swing.JFrame {
             operation = oldOperationLabel.getText().charAt(0);
             calculateOldAnswer();
             resultField.setText(format.format(oldAnswer));
-        } else if (resultField.getText().isEmpty() && !oldOperationLabel.getText().isEmpty()) {
+        } else if (resultField.getText().isEmpty() && !oldOperationLabel.getText().isEmpty()) { // if there is one number
             resultField.setText(oldResultLabel.getText());
         }
-
+        //remove old numbers after set result
         oldResultLabel.setText("");
         oldOperationLabel.setText("");
-
+        //user clicked equal 
         isEqualClicked = true;
     }//GEN-LAST:event_equalBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        if(resultField.getText().equals("Error") || resultField.getText().equals("cannot divide by 0")) {
+        if (resultField.getText().equals("Error") || resultField.getText().equals("cannot divide by 0")) {//if there is an error remove it 
             resultField.setText("");
-        } else if(!resultField.getText().isEmpty()) {
-            resultField.setText(resultField.getText().substring(0, resultField.getText().length() -1 ));
+        } else if (!resultField.getText().isEmpty()) {//if there is inputs remove the last one
+            resultField.setText(resultField.getText().substring(0, resultField.getText().length() - 1));
         }
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
-       resultField.setText("");
-       oldOperationLabel.setText("");
-       oldResultLabel.setText("");
-       num = 0;
-       oldAnswer = 0;
+        //reset the program values 
+        resultField.setText("");
+        oldOperationLabel.setText("");
+        oldResultLabel.setText("");
+        num = 0;
+        oldAnswer = 0;
     }//GEN-LAST:event_clearBtnActionPerformed
 
     /**
@@ -606,7 +614,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    //calculate all operation
     private void calculateOldAnswer() {
         switch (operation) {
             case 'x' ->
@@ -626,7 +634,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-    private void setClickedNumber(JButton clickedBtn) {
+    private void setClickedNumber(JButton clickedBtn) {//for every buttons are clicked just set button text to field 
         if (isEqualClicked || resultField.getText().equals("0")) {
             resultField.setText(clickedBtn.getText());
         } else {
@@ -636,7 +644,7 @@ public class MainFrame extends javax.swing.JFrame {
         isEqualClicked = false;
         isTextChanged = true;
     }
-
+    //check divide by zero
     private boolean isDivideByZero() {
         return resultField.getText().equals("0") && oldOperationLabel.getText().equals("÷");
     }
