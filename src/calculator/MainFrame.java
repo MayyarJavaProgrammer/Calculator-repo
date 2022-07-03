@@ -624,11 +624,7 @@ public class MainFrame extends javax.swing.JFrame {
             case '+' ->
                 oldAnswer += num;
             case '-' -> {
-                if (!oldResultLabel.getText().isEmpty()) {
-                    oldAnswer -= num;
-                } else {
-                    oldAnswer = num - oldAnswer;
-                }
+                oldAnswer -= num;
             }
 
         }
