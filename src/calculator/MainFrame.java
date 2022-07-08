@@ -24,7 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
     boolean isTextChanged = false;
     boolean isEqualClicked = false;
     DecimalFormat format = new DecimalFormat("0.#############");
-
+    
     /**
      * Creates new form Main
      */
@@ -498,7 +498,7 @@ public class MainFrame extends javax.swing.JFrame {
                 if (oldResultLabel.getText().isEmpty()) {
                     //if condition is true that mean this is first operation so we have to set it
                     operation = 'x';
-                    oldAnswer = 1;
+                    oldAnswer = num;
                 } else {//there is two number do calculate
                     oldAnswer = Double.parseDouble(oldResultLabel.getText());
                     calculateOldAnswer();
