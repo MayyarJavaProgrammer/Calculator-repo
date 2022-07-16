@@ -40,8 +40,6 @@ public class MainFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {//GEN-BEGIN:initComponents
 
-        jButton12 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         resultField = new javax.swing.JTextField();
         oldResultLabel = new javax.swing.JLabel();
         oneBtn = new javax.swing.JButton();
@@ -63,15 +61,6 @@ public class MainFrame extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         clearBtn = new javax.swing.JButton();
         oldOperationLabel = new javax.swing.JLabel();
-
-        jButton12.setText("=");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculator");
@@ -358,10 +347,6 @@ public class MainFrame extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(254, 282));
         setLocationRelativeTo(null);
     }//GEN-END:initComponents
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
 
     private void resultFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultFieldActionPerformed
         // TODO add your handling code here:
@@ -655,8 +640,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton equalBtn;
     private javax.swing.JButton fiveBtn;
     private javax.swing.JButton fourBtn;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JButton multiplicBtn;
     private javax.swing.JButton nineBtn;
     private javax.swing.JLabel oldOperationLabel;
